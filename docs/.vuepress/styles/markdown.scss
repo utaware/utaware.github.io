@@ -1,0 +1,28 @@
+@import "variable.scss";
+// markdown中的一些样式设置
+
+.theme-hope-content {
+  background-image:
+    linear-gradient(90deg,rgba(159,219,252,.15) 3%,transparent 0),
+    linear-gradient(1turn,rgba(159,219,252,.15) 3%,transparent 0);
+  background-size: 20px 20px;
+  background-position: 50%;
+}
+
+td {
+  line-height: 2;
+}
+
+code {
+  color: $theme-color;
+  background-color: rgba($theme-color, 0.08);
+}
+
+blockquote {
+  padding: 0.5em 1em;
+  margin: 12px 0;
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+  border-left: 3px solid $theme-color;
+  background-color: rgba($theme-color, 0.08);
+}
