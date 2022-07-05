@@ -1,9 +1,9 @@
-import { stat, readdir, writeFile, readFile } from 'fs/promises'
+const { stat, readdir, writeFile, readFile } = require('fs/promises')
 
-import { resolve, relative, parse, sep } from 'path'
+const { resolve, relative, parse, sep } =  require('path')
 
-import yaml from 'js-yaml'
-import matter from 'gray-matter'
+const yaml = require('js-yaml')
+const matter = require('gray-matter')
 // 生成readme.md默认需要的yaml配置
 const defaultOptions = {
   article: false
