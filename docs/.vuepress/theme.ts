@@ -1,6 +1,8 @@
-import { hopeTheme } from "vuepress-theme-hope";
-import navbar from "./navbar";
-import sidebar from "./sidebar";
+import { hopeTheme } from 'vuepress-theme-hope'
+
+import navbar from './navbar'
+
+console.log('includes:', __dirname)
 
 export default hopeTheme({
   hostname: "https://github.com/utaware",
@@ -22,7 +24,7 @@ export default hopeTheme({
   navbar: navbar,
 
   // sidebar
-  sidebar,
+  sidebar: false,
 
   footer: "Theme by vuepress-theme-hope",
 
@@ -66,6 +68,12 @@ export default hopeTheme({
       footnote: true,
       // v-pre
       vpre: true,
+      // 导入文件
+      include: {
+        getPath: (filePath) => {
+          return filePath
+        }
+      },
       // 幻灯片
       presentation: {
         plugins: ["highlight", "math", "search", "notes", "zoom"],

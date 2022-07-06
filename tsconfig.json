@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+      "target": "esnext",
+      "module": "esnext",
+      "strict": true, // js/ts 混用时设为false
+      "jsx": "preserve",
+      "importHelpers": true,
+      "moduleResolution": "node",
+      "experimentalDecorators": true,
+      "esModuleInterop": true,
+      "allowSyntheticDefaultImports": true,
+      "sourceMap": true,
+      "noImplicitThis": true, // js/ts 混用时设为false
+      "baseUrl": ".",
+      "types": [],
+      "paths": {
+        "@/*": ["docs/*"]
+      },
+      "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
+  },
+  "include": ["docs/.vuepress/**/*.ts", "docs/.vuepress/**/*.vue", "docs/.vuepress/typings/*.d.ts"],
+  "exclude": ["node_modules"]
+}

@@ -1,4 +1,5 @@
 import { defineUserConfig } from "vuepress"
+import { path } from "@vuepress/utils"
 
 import theme from "./theme"
 
@@ -8,6 +9,9 @@ export default defineUserConfig({
   description: "utaware's blog",
   base: "/",
   theme,
+  alias: {
+    "@WebRailRange": path.resolve(__dirname, "./components/WebRailRange.vue")
+  },
   pagePatterns: [
     "**/*.md",
     "!*.snippet.md",

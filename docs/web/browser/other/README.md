@@ -1,8 +1,9 @@
 ---
 date: 2022-06-10
 category:
-  - browser
+  - web
 tag:
+  - browser
   - hack
 ---
 

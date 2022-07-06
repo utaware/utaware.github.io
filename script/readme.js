@@ -83,13 +83,12 @@ class GeneratorReadme {
   }
 
   get currentPathDirs () {
-    const { hasDirector } = this
     return Object.values(this.currentDirFiles).filter(({ isDir, name }) => {
       const { ext, base } = parse(name)
       const isReadme = base.toUpperCase().includes('README')
       const isMd = ext === '.md'
-      const isNotReadmeMd = isMd && !isReadme
-      return hasDirector ? isDir : isNotReadmeMd
+      const isNotReadmeMd = isMd & !isReadme
+      return isNotReadmeMd || isDir
     })
   }
 
@@ -99,8 +98,10 @@ class GeneratorReadme {
 
   get markdownListContent () {
     return this.currentPathDirs.map((v) => {
-      const { name, title } = v
-      return `* [${title}](${name})`
+      const { name, title, isDir } = v
+      // * [title](./name.md)
+      // * [title](./name/)
+      return `* [${title}](./${name}${isDir ? '/' : ''})`
     }).join('\n')
   }
 
@@ -119,8 +120,7 @@ class GeneratorReadme {
   }
 
   get yamlHeaderContent () {
-    const { sidebarOptions } = this
-    const data = Object.assign({}, defaultOptions, sidebarOptions)
+    const data = Object.assign({}, defaultOptions)
     return yaml.dump(data)
   }
 

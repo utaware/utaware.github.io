@@ -96,3 +96,17 @@ const a = 1;
 <!-- 也可以使用连接的参考式方式 -->
 ![bilibili](https://www.bilibili.com/favicon.ico "bilibili")
 ```
+
+## 表格(table)
+
+| 属性 | 值 |
+| :--: | :--: |
+| text | 是 |
+| myStyle | 否 |
+
+```md
+| 属性 | 值 |
+| :--: | :--: |
+| text | 是 |
+| myStyle | 否 |
+```

@@ -1,9 +1,9 @@
 import { defineClientConfig } from "@vuepress/client"
 
-import test from "./components/test.vue"
+// import WebRailRange from './components/WebRailRange.vue'
 
 export default defineClientConfig({
   enhance: ({ app, router, siteData }) => {
-    app.component("test", test)
+    // app.component('WebRailRange', WebRailRange)
   },
 })
