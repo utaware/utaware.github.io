@@ -82,8 +82,9 @@ const a = 1;
 ```md
 <!-- 链接过长会很影响内容 -->
 [MDN](https://developer.mozilla.org/zh-CN/)
-<!-- 参考链接: 更加易读与整理 -->
+<!-- 高级链接: 更加易读与整理 -->
 [Google][]
+<!-- [谷歌][google] -->
 <!-- 推荐标识标签均使用小写 -->
 [google]: http://google.com/
 ```
