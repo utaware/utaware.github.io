@@ -1,0 +1,26 @@
+import{_ as e}from"./plugin-vue_export-helper.21dcd24c.js";import{r as t,o as c,c as o,a as n,b as p,d as s,e as i}from"./app.a9791504.js";const l={},r=n("h1",{id:"two-sum",tabindex:"-1"},[n("a",{class:"header-anchor",href:"#two-sum","aria-hidden":"true"},"#"),s(" two-sum")],-1),u={href:"https://leetcode.cn/problems/two-sum/",target:"_blank",rel:"noopener noreferrer"},d=s("leetcode"),k=i(`<p>\u7ED9\u5B9A\u4E00\u4E2A\u6574\u6570\u6570\u7EC4 nums\xA0\u548C\u4E00\u4E2A\u6574\u6570\u76EE\u6807\u503C target\uFF0C\u8BF7\u4F60\u5728\u8BE5\u6570\u7EC4\u4E2D\u627E\u51FA \u548C\u4E3A\u76EE\u6807\u503C target\xA0 \u7684\u90A3\xA0\u4E24\u4E2A\xA0\u6574\u6570\uFF0C\u5E76\u8FD4\u56DE\u5B83\u4EEC\u7684\u6570\u7EC4\u4E0B\u6807\u3002</p><p>\u4F60\u53EF\u4EE5\u5047\u8BBE\u6BCF\u79CD\u8F93\u5165\u53EA\u4F1A\u5BF9\u5E94\u4E00\u4E2A\u7B54\u6848\u3002\u4F46\u662F\uFF0C\u6570\u7EC4\u4E2D\u540C\u4E00\u4E2A\u5143\u7D20\u5728\u7B54\u6848\u91CC\u4E0D\u80FD\u91CD\u590D\u51FA\u73B0\u3002</p><p>\u4F60\u53EF\u4EE5\u6309\u4EFB\u610F\u987A\u5E8F\u8FD4\u56DE\u7B54\u6848\u3002</p><div class="custom-container tip"><p class="custom-container-title">\u793A\u4F8B</p><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>\u793A\u4F8B 1\uFF1A
+\u8F93\u5165\uFF1Anums = [2,7,11,15], target = 9
+\u8F93\u51FA\uFF1A[0,1]
+\u89E3\u91CA\uFF1A\u56E0\u4E3A nums[0] + nums[1] == 9 \uFF0C\u8FD4\u56DE [0, 1]
+
+\u793A\u4F8B 2\uFF1A
+\u8F93\u5165\uFF1Anums = [3,2,4], target = 6
+\u8F93\u51FA\uFF1A[1,2]
+
+\u793A\u4F8B 3\uFF1A
+\u8F93\u5165\uFF1Anums = [3,3], target = 6
+\u8F93\u51FA\uFF1A[0,1]
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div></div><h2 id="\u9898\u89E3" tabindex="-1"><a class="header-anchor" href="#\u9898\u89E3" aria-hidden="true">#</a> \u9898\u89E3</h2><div class="language-javascript ext-js line-numbers-mode"><pre class="language-javascript"><code><span class="token keyword">function</span> <span class="token function">twoSum</span> <span class="token punctuation">(</span><span class="token parameter">nums<span class="token punctuation">,</span> target</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> cache <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+  <span class="token keyword">const</span> len <span class="token operator">=</span> arr<span class="token punctuation">.</span>length
+  <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> len<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> item <span class="token operator">=</span> arr<span class="token punctuation">[</span>i<span class="token punctuation">]</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>item <span class="token keyword">in</span> cache<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">return</span> <span class="token punctuation">[</span>cache<span class="token punctuation">[</span>item<span class="token punctuation">]</span><span class="token punctuation">,</span> i<span class="token punctuation">]</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+      cache<span class="token punctuation">[</span>target <span class="token operator">-</span> item<span class="token punctuation">]</span> <span class="token operator">=</span> i <span class="token comment">// // i\u4E3A0\u4F1A\u51FA\u9519</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">return</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div>`,6);function v(m,b){const a=t("ExternalLinkIcon");return c(),o("div",null,[r,n("p",null,[n("a",u,[d,p(a)])]),k])}var g=e(l,[["render",v],["__file","PT-01.html.vue"]]);export{g as default};
