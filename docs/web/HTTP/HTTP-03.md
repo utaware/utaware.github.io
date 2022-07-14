@@ -1,7 +1,7 @@
 ---
 date: 2022-06-02
 category:
-  - browser
+  - web
 tag:
   - http
 ---

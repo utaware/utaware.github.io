@@ -74,6 +74,8 @@ export default hopeTheme({
           return filePath
         }
       },
+      // mermaid
+      mermaid: true,
       // 幻灯片
       presentation: {
         plugins: ["highlight", "math", "search", "notes", "zoom"],
