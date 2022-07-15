@@ -1,7 +1,7 @@
 ---
 date: 2022-07-01
 category:
-  - javascript
+  - language
 tag:
   - JS
 ---

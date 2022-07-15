@@ -1,7 +1,7 @@
 ---
 date: 2022-06-20
 category:
-  - javascript
+  - language
 tag:
   - ES
 ---
