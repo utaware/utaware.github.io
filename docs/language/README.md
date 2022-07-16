@@ -4,7 +4,8 @@ article: false
 
 # language
 
-* [yaml](./yaml/)
-* [markdown](./markdown/)
+* [design-patterns](./design-patterns/)
+* [ECMAscript](./ECMAscript/)
 * [javascript](./javascript/)
-* [ECMAcript](./ECMAscript/)
+* [markdown](./markdown/)
+* [yaml](./yaml/)
