@@ -49,8 +49,7 @@ export default hopeTheme({
   plugins: {
 
     blog: {
-      // 在文章列表中展示指定的摘要或描述, 可通过description覆盖
-      autoExcerpt: false,
+      excerptLength: 0,
     },
 
     mdEnhance: {
@@ -67,17 +66,13 @@ export default hopeTheme({
       // 脚注
       footnote: true,
       // v-pre
-      vpre: true,
+      vPre: true,
       // 导入文件
-      include: {
-        getPath: (filePath) => {
-          return filePath
-        }
-      },
+      include: {},
       // mermaid
       mermaid: true,
       // 幻灯片
-      presentation: {
+      revealJs: {
         plugins: ["highlight", "math", "search", "notes", "zoom"],
       },
     },
