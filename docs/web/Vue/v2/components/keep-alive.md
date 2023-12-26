@@ -1,5 +1,4 @@
 ---
-date: 2022-06-05
 category:
   - web
 tag:
@@ -8,31 +7,73 @@ tag:
 
 # keep-alive
 
-> keep-alive是一个抽象组件：它自身不会渲染一个 DOM 元素，也不会出现在父组件链中；使用keep-alive包裹动态组件时，会缓存不活动的组件实例，而不是销毁它们。缓存机制是根据LRU策略来设置缓存组件新鲜度
+## use
 
-## 使用
-
-```vue
+```html
 <keep-alive :include="whiteList" :exclude="blackList" :max="amount">
+  <!-- 动态组件 -->
   <component :is="currentComponent"></component>
+  <!-- vue-router -->
+  <router-view></router-view>
 </keep-alive>
 ```
 
-## 参数
+## props
 
-*   include: string | regExp(只有名称匹配的组件会被缓存)
-*   exclude: string | regExp(任何名称匹配的组件都不会被缓存)
-*   max: number(最多可以缓存多少组件实例数量)
+### `include`
 
-## 生命周期
+- type : `[String, RegExp, Array]`
+- desc : 缓存白名单
 
-> 被包含在 keep-alive 中创建的组件，会多出两个生命周期的钩子: activated 与 deactivated，在服务器端渲染期间不被调用。使用 keep-alive 会将数据保留在内存中，如果要在每次进入页面的时候获取最新的数据，需要在 activated 阶段获取数据，承担原来 created 钩子函数中获取数据的任务。
+### `exclude`
+
+- type : `[String, RegExp, Array]`
+- desc : 缓存黑名单
+
+### `max`
+
+- type : `[String, Number]`
+- desc : 缓存组件上限，超出上限使用LRU的策略置换缓存数据
+
+## hooks
 
 * activated
 * deactivated
 
+> 被包含在 keep-alive 中创建的组件，会多出两个生命周期的钩子: activated 与 deactivated，在服务器端渲染期间不被调用。使用 keep-alive 会将数据保留在内存中，如果要在每次进入页面的时候获取最新的数据，需要在 activated 阶段获取数据，承担原来 created 钩子函数中获取数据的任务。
 
-## 实现
+## abstract
+
+> `keep-alive`是一个抽象组件：它自身不会渲染一个 DOM 元素，也不会出现在父组件链中；使用`keep-alive`包裹动态组件时，会缓存不活动的组件实例，而不是销毁它们。缓存机制是根据`LRU策略`来设置缓存组件新鲜度
+
+```js
+// src/core/instance/lifecycle.js
+export function initLifecycle (vm: Component) {
+  const options = vm.$options
+  let parent = options.parent
+  if (parent && !options.abstract) {
+    // 在初始化阶段会调用 initLifecycle，里面判断父级是否为抽象组件，如果是抽象组件，就选取抽象组件的上一级作为父级，忽略与抽象组件和子组件之间的层级关系。
+    while (parent.$options.abstract && parent.$parent) {
+      parent = parent.$parent
+    }
+    parent.$children.push(vm)
+  }
+  vm.$parent = parent
+  // ...
+}
+```
+
+## source-code
+
+```ts
+type CacheEntry = {
+  name: ?string;
+  tag: ?string;
+  componentInstance: Component;
+};
+
+const patternTypes: Array<Function> = [String, RegExp, Array]
+```
 
 ```js
 // src/core/components/keep-alive.js
@@ -86,49 +127,35 @@ export default {
       ) {
         return vnode
       }
-      // 匹配条件通过会进入缓存机制的逻辑，如果命中缓存，从 cache 中获取缓存的实例设置到当前的组件上，并调整 key 的位置将其放到最后。如果没命中缓存，将当前 VNode 缓存起来，并加入当前组件的 key。如果缓存组件的数量超出 max 的值，即缓存空间不足，则调用 pruneCacheEntry 将最旧的组件从缓存中删除，即 keys[0] 的组件。之后将组件的 keepAlive 标记为 true，表示它是被缓存的组件。
+      // 匹配条件通过会进入缓存机制的逻辑
       const { cache, keys } = this
       const key: ?string = vnode.key == null
         // same constructor may get registered as different local components
         // so cid alone is not enough (#3269)
         ? componentOptions.Ctor.cid + (componentOptions.tag ? `::${componentOptions.tag}` : '')
         : vnode.key
+      // 如果命中缓存，从 cache 中获取缓存的实例设置到当前的组件上
       if (cache[key]) {
         vnode.componentInstance = cache[key].componentInstance
-        // make current key freshest
+        // 并调整 key 的位置将其放到最后。
         remove(keys, key)
         keys.push(key)
       } else {
+        // 如果没命中缓存，将当前 VNode 缓存起来
         cache[key] = vnode
+        // 并加入当前组件的 key
         keys.push(key)
-        // prune oldest entry
+        // 如果缓存组件的数量超出 max 的值，即缓存空间不足
+        // 则调用 pruneCacheEntry 将最旧的组件从缓存中删除，即 keys[0] 的组件。
         if (this.max && keys.length > parseInt(this.max)) {
           pruneCacheEntry(cache, keys[0], keys, this._vnode)
         }
       }
+      // 之后将组件的 keepAlive 标记为 true，表示它是被缓存的组件。
       vnode.data.keepAlive = true
     }
     return vnode || (slot && slot[0])
   }
-}
-```
-
-> kepp-alive 实际是一个抽象组件，只对包裹的子组件做处理，并不会和子组件建立父子关系，也不会作为节点渲染到页面上。Vue在初始化生命周期的时候，为组件实例建立父子关系会根据abstract属性决定是否忽略某个组件。在keep-alive中，设置了abstract: true，那Vue就会跳过该组件实例。最后构建的组件树中就不会包含keep-alive组件，那么由组件树渲染成的DOM树自然也不会有keep-alive相关的节点了。
-
-```js
-// src/core/instance/lifecycle.js
-export function initLifecycle (vm: Component) {
-  const options = vm.$options
-  let parent = options.parent
-  if (parent && !options.abstract) {
-    // 在初始化阶段会调用 initLifecycle，里面判断父级是否为抽象组件，如果是抽象组件，就选取抽象组件的上一级作为父级，忽略与抽象组件和子组件之间的层级关系。
-    while (parent.$options.abstract && parent.$parent) {
-      parent = parent.$parent
-    }
-    parent.$children.push(vm)
-  }
-  vm.$parent = parent
-  // ...
 }
 ```
 
@@ -163,24 +190,22 @@ function pruneCache (keepAliveInstance: any, filter: Function) {
 }
 ```
 
-*   第一步：获取keep-alive包裹着的第一个子组件对象及其组件名；
-*   第二步：根据设定的黑白名单（如果有）进行条件匹配，决定是否缓存。不匹配，直接返回组件实例（VNode），否则执行第三步；
-*   第三步：根据组件ID和tag生成缓存Key，并在缓存对象中查找是否已缓存过该组件实例。如果存在，直接取出缓存值并更新该`key`在`this.keys`中的位置（更新key的位置是实现LRU置换策略的关键），否则执行第四步；
-*   第四步：在`this.cache`对象中存储该组件实例并保存`key`值，之后检查缓存的实例数量是否超过`max`的设置值，超过则根据LRU置换策略删除最近最久未使用的实例（即是下标为0的那个key）。
-*   第五步：最后并且很重要，将该组件实例的`keepAlive`属性值设置为`true`。
+## render
 
-## 渲染
-
-`keep-alive`并非真的不会渲染，而是渲染的对象是包裹的子组件。Vue的渲染是从render阶段开始的，但keep-alive的渲染是在patch阶段，这是构建组件树（虚拟DOM树），并将VNode转换成真正DOM节点的过程。
+`keep-alive`并非真的不会渲染，而是渲染的对象是包裹的子组件。`Vue` 的渲染最后都会到 `patch` 过程, 而组件的 `patch` 过程会执行 `createComponent `方法
 
 ```js
 // src/core/vdom/patch.js
 function createComponent (vnode, insertedVnodeQueue, parentElm, refElm) {
   let i = vnode.data
   if (isDef(i)) {
-    // isReactivated 标识组件是否重新激活。在初始化渲染时，A组件还没有初始化构造完成，
+    // isReactivated 标识组件是否重新激活
+    // 首次渲染
+    // vnode.componentInstance -> undefined (在componentVNodeHooks.insert中被赋值)
+    // i.keepAlive -> true (render中改变)
     const isReactivated = isDef(vnode.componentInstance) && i.keepAlive
     if (isDef(i = i.hook) && isDef(i = i.init)) {
+      // 此时 i => vnode.data.hook.init => init(vnode, false)
       i(vnode, false /* hydrating */) // => create-component.js
     }
 
@@ -191,6 +216,7 @@ function createComponent (vnode, insertedVnodeQueue, parentElm, refElm) {
       insert(parentElm, vnode.elm, refElm)
       // 组件命中缓存被重新激活
       if (isTrue(isReactivated)) {
+        // 组件被 keep-alive 包裹的情况，激活组件
         reactivateComponent(vnode, insertedVnodeQueue, parentElm, refElm)
       }
       return true
@@ -198,6 +224,11 @@ function createComponent (vnode, insertedVnodeQueue, parentElm, refElm) {
   }
 }
 ```
+
+**首次渲染**
+
+在首次加载被包裹组件时，由`keep-alive.js`中的`render函`数可知，`vnode.componentInstance`的值是`undefined`，`keepAlive`的值是`true`，因为`keep-alive`组件作为父组件，它的`render`函数会先于被包裹组件执行；那么就只执行到`i(vnode, false /* hydrating */)`，后面的逻辑不再执行
+
 
 ```js
 // 源码位置：src/core/vdom/create-component.js
