@@ -9,3 +9,4 @@ article: false
 * [javascript](./javascript/)
 * [markdown](./markdown/)
 * [yaml](./yaml/)
+* [python](./python/)
