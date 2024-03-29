@@ -3,7 +3,7 @@ date: 2022-07-17
 category:
   - web
 tag:
-  - http
+  - optimize
 ---
 
 # DNS预解析
