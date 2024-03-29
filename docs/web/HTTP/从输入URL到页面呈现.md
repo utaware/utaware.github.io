@@ -13,12 +13,12 @@ tag:
   - CDN
   - DNS 缓存
   - DNS 均衡负载
-  - [DNS 预解析](./HTTP-06.md)
+  - DNS 预解析
 - HTTP
-  - [HTTP 请求方法](./HTTP-05.md)
-  - [HTTP 请求状态码](./HTTP-01.md)
-  - [HTTP 请求头信息](./HTTP-02.md)
-  - [HTTP 请求跨域](./HTTP-03.md)
+  - HTTP 请求方法
+  - HTTP 请求状态码
+  - HTTP 请求头信息
+  - HTTP 请求跨域
     - jsonp
     - postMessage
     - cors
@@ -27,7 +27,7 @@ tag:
       - domain
       - window.name
       - hash
-  - [HTTP 缓存](./HTTP-08.md)
+  - HTTP 缓存
     - Memory Cache
     - Service Worker Cache
       - PWA

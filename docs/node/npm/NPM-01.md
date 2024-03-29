@@ -119,7 +119,7 @@ npm version major
 * package.json -> main字段文件
 :::
 
-::: danger 总是被忽略
+::: caution 总是被忽略
 * .git
 * CVS
 * .svn

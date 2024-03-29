@@ -10,4 +10,4 @@ article: false
 * [this关键字](./this关键字.md)
 * [继承(一)](./继承(一).md)
 * [继承(二)](./继承(二).md)
-* [yield关键字](./yield.md)
+* [yield关键字](./yield关键字.md)
