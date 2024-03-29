@@ -84,33 +84,6 @@ TTL(Time-To-Live)，就是一条域名解析记录在DNS服务器中的存留时
 
 > 过多的预获取会导致过量的DNS解析，对网络是一种负担。
 
-## 拓展
-
-**预连接 rel="preconnect"**
-
-> 与 DNS 预解析类似，Preconnect 不仅完成 DNS 预解析，同时还将进行 TCP 握手和建立传输层协议
-
-```html
-<link rel="preconnect" href="http://example.com">
-```
-
-**预获取 rel="prefetch"**
-
-> 如果我们确定某个资源（图片/脚本文件/css文件）将来一定会被使用到，我们可以让浏览器预先请求该资源并放入浏览器缓存中。与 DNS 预解析不同，预获取真正请求并下载了资源，并储存在缓存中
-
-```html
-<link rel="prefetch" href="image.png / test.js / test.css">
-```
-
-**预渲染 rel="prerender"**
-
-> 对一个用户将来一定会打开的 tab 页：将【下载所有资源、创建 DOM 结构、完成页面布局、应用 CSS 样式和执行 JavaScript 脚本】等。当用户真正访问该链接时，隐藏的页面就切换为可见，使页面看起来就是瞬间加载完成一样
-
-```html
-<!-- 前提是：用户在将来一定会打开该tab页，否则会造成不必要的资源浪费 -->
-<link rel="prerender" href="http://example.com">
-```
-
 ## 最佳实践
 
 1. `dns-prefetch` 仅对跨域域上的 DNS查找有效，因此请避免使用它来指向相同域。这是因为，到浏览器看到提示时，您站点域背后的IP已经被解析。
