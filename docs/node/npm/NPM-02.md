@@ -93,6 +93,14 @@ tag:
 
 * json-server
 
+## Vue
+
+| name | description|
+| :-: | :-: |
+| pinia | vue状态管理 |
+| pinia-plugin-persistedstate | pinia状态持久化 |
+| VueUse | vue版本的hooks整合 |
+
 ## 浏览器
 
 | name | description|
