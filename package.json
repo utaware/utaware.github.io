@@ -7,8 +7,7 @@
     "dev": "vuepress dev docs",
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs",
-    "docs:clean-dev": "vuepress dev docs --clean-cache",
-    "readme": "node script/readme.js"
+    "docs:clean-dev": "vuepress dev docs --clean-cache"
   },
   "keywords": [],
   "author": "",
