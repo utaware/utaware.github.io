@@ -1,4 +1,5 @@
 import { defineUserConfig } from "vuepress"
+import { viteBundler } from '@vuepress/bundler-vite'
 import { path } from "@vuepress/utils"
 
 import theme from "./theme"
@@ -17,5 +18,9 @@ export default defineUserConfig({
     "!*.snippet.md",
     "!.vuepress",
     "!node_modules"
-  ]
+  ],
+  bundler: viteBundler({
+    viteOptions: {},
+    vuePluginOptions: {},
+  }),
 })

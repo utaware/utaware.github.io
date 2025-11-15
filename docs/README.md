@@ -1,6 +1,6 @@
 ---
 home: true
-layout: BlogHome
+layout: Blog
 icon: home
 title: utaware's blog
 bgImage: /images/bg.jpg
