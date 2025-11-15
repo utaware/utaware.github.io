@@ -1,9 +1,6 @@
 import { hopeTheme } from 'vuepress-theme-hope'
 
 import navbar from './navbar'
-
-console.log('includes:', __dirname)
-
 export default hopeTheme({
   hostname: 'https://github.com/utaware',
 
@@ -48,8 +45,8 @@ export default hopeTheme({
       excerptLength: 0,
     },
     icon: {
-      assets: 'fontawesome'
-    }
+      assets: 'fontawesome',
+    },
   },
 
   markdown: {
@@ -63,6 +60,6 @@ export default hopeTheme({
     // 导入文件
     include: {},
     mermaid: true,
-    revealjs: true
+    revealjs: true,
   },
 })

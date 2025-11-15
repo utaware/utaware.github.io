@@ -1,0 +1,13 @@
+.vp-page {
+  background-image:
+    linear-gradient(90deg,rgba(159,219,252,.15) 3%,transparent 0),
+    linear-gradient(1turn,rgba(159,219,252,.15) 3%,transparent 0);
+  background-size: 20px 20px;
+  background-position: 50%;
+}
+
+.vp-code-tab {
+  div[class*=language-] {
+    border-radius: 0 0 var(--code-border-radius) var(--code-border-radius);
+  }
+}

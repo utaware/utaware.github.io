@@ -23,9 +23,17 @@ tag:
 
 ## 数据结构
 
-* 对象(objecy): 键值对的集合 - 映射(mapping) | 哈希(hashes) | 字典(dictionary)
-* 数组(array): 按次序排列的值 - 序列(sequence) | 列表(list)
-* 纯量(scalars): 单个的值 - 原始值(primitive value)
+* 对象(objecy): 键值对的集合
+  - 映射(mapping)
+  - 哈希(hashes)
+  - 字典(dictionary)
+
+* 数组(array): 按次序排列的值
+  - 序列(sequence)
+  - 列表(list)
+
+* 纯量(scalars): 单个的值
+  - 原始值(primitive value)
 
 ### 对象
 
